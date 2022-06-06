@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  eseek-api:
+    image: node:14
+    user: node
+    stdin_open: true
+    tty: true
+    working_dir: /opt/app
+    entrypoint: '/bin/bash'
+    ports:
+      - 3000:3000
+      - 9229:9229
+    volumes:
+      - ${PWD}:/opt/app
+    environment:
+      - NODE_ENV=development
