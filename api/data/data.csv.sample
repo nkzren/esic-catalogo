@@ -1,0 +1,5 @@
+city;domain;url;hasEsic
+São Paulo;www.capital.sp.gov.br;esic.prefeitura.sp.gov.br/Account/Login.aspx;true
+Curitiba;www.curitiba.pr.gov.br;autenticacao-ecidadao.curitiba.pr.gov.br;true
+Sorocaba;www.sorocaba.sp.gov.br;transparencia.sorocaba.sp.gov.br/esic/wp_login.aspx?3552205,1;true
+
