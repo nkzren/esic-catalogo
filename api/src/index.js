@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const database = require('./repository/csv_reader');
+const database = require('./repository/url_inmemory_repository');
 const port = 3000;
 
 require('./routes')(app);
