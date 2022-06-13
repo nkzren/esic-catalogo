@@ -30,9 +30,12 @@ const getByDomain = function(domain) {
 }
 
 const addCatalogEntry = function(entry) {
+  const { city, domain, url, hasEsic } = entry;
   const dataToWrite = {
-    id: data.length + 1,
-    ...entry,
+    city,
+    domain,
+    url,
+    hasEsic
   }
   const csvString = stringify([
     dataToWrite
