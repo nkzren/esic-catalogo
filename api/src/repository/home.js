@@ -1,7 +1,7 @@
 const helloWorld = (req, res) => {
-    res.send('Olá mundo!')
-  }
-  
-  module.exports = {
-    helloWorld,
-  }
+  res.send('Olá Mundo!')
+}
+
+module.exports = {
+  helloWorld
+}
