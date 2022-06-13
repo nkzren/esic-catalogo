@@ -6,36 +6,26 @@ const getByDomain = async function (domain) {
 
 const addCatalogEntry = function (entry) {
   
-  if (isEntryValid(entry, true)) 
-    return urlRepository.addCatalogEntry(entry)
-  
-  return;
+  if (isEntryValid(entry, true)) {
+    urlRepository.addCatalogEntry(entry)
+  }
 }
 
 const updateCatalogEntry = function (entry) {
   
-  if (isEntryValid(entry, false)) 
+  if (isEntryValid(entry, false)) {
     return urlRepository.addCatalogEntry(entry)
-  
-  return;
+  }
 }
 
 const isEntryValid = function (entry, isAdd) {
   
-  if (entry.city == null ||
-    entry.domain == null ||
-    entry.url == null ||
-    entry.hasEsic == null) 
+  if (!(entry.city || entry.domain || entry.url || entry.hasEsic)) {
     return false;
+  }
 
-  if (isAdd) {
-    if (getByDomain(entry.domain) != null)
+  if (isAdd && getByDomain(entry.domain) || getByDomain(entry.domain)) {
       return false;
-
-  } else { // isUpdate
-
-    if (getByDomain(entry.domain) == null)
-      return false; 
   }
     
   return true;

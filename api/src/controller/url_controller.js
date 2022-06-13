@@ -12,7 +12,8 @@ const getUrl = async function(req, res, next) {
 }
 
 const addUrl = function(req, res, next) {
-  const entry = req.query.entry;
+  const { city, domain, url, hasEsic } = req.body;
+  const entry = { city, domain, url, hasEsic };
   try {
     urlService.addCatalogEntry(entry);
     res.end();
