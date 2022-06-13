@@ -1,16 +1,20 @@
 const fs = require('fs');
-const csv = require('csv-parser');
+const { parse } = require('csv');
+const { stringify } = require('csv-stringify/sync');
 const { dirname } = require('path');
 const appDir = dirname(require.main.filename);
+const csvColumns = ['id', 'city', 'domain', 'url', 'hasEsic'];
 
 const data = [];
 
 const init = function() {
   return new Promise((resolve, reject) => {
     fs.createReadStream(`${appDir}/../data/data.csv`)
-      .pipe(csv({ separator: ';' }))
+      .pipe(parse({ delimiter: ';', columns: true }))
       .on('data', (row) => {
-        data.push(row) 
+        data.push({
+          ...row,
+        }) 
       })
       .on('end', () => {
         resolve();
@@ -26,7 +30,23 @@ const getByDomain = function(domain) {
 }
 
 const addCatalogEntry = function(entry) {
+  const dataToWrite = {
+    id: data.length + 1,
+    ...entry,
+  }
+  const csvString = stringify([
+    dataToWrite
+  ], {
+    columns: csvColumns.map(mapToColumnKeys),
+    delimiter: ';',
+  });
+  fs.appendFileSync(`${appDir}/../data/data.csv`, csvString + '\n');
+}
 
+const mapToColumnKeys = (columnName) => {
+  return {
+    key: columnName,
+  }
 }
 
 module.exports = {
