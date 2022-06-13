@@ -19,13 +19,18 @@ const init = function() {
   });
 }
 
-const getByDomain = function (domain) {
+const getByDomain = function(domain) {
   return data.filter(item => {
     return item && item.domain === domain
   })[0];
 }
 
+const addCatalogEntry = function(entry) {
+
+}
+
 module.exports = {
   getByDomain,
+  addCatalogEntry,
   init
 }
