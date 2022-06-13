@@ -1,6 +1,6 @@
 const { urlencoded } = require('body-parser');
-const { helloWorld } = require('./routes/home');
-const routeUrl = require('./routes/url');
+const { helloWorld } = require('./controller/home');
+const routeUrl = require('./controller/url_controller');
 
 module.exports = (app) => {
   app.use(urlencoded({ extended: true }));
