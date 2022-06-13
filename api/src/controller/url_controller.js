@@ -14,8 +14,8 @@ const getUrl = async function(req, res, next) {
 const addUrl = function(req, res, next) {
   const entry = req.query.entry;
   try {
-    const data = urlService.addCatalogEntry(entry);
-    res.send(data);
+    urlService.addCatalogEntry(entry);
+    res.end();
   } catch (error) {
     console.error(error)
     next(error);
