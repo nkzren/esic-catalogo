@@ -1,7 +1,7 @@
-const urlRepository = require('../repository/url_inmemory_repository');
+const urlRepository = require('../repository/url_repository');
 
-const getByDomain = function (domain) {
-  return urlRepository.getByDomain(domain)
+const getByDomain = async function (domain) {
+  return await urlRepository.getByDomain(domain)
 }
 
 module.exports = {

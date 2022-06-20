@@ -1,9 +1,9 @@
 const urlService = require('../service/url_service');
 
-const getUrl = function(req, res, next) {
+const getUrl = async function(req, res, next) {
   const domain = req.query.domain;
   try {
-    const data = urlService.getByDomain(domain);
+    const data = await urlService.getByDomain(domain);
     res.send(data);
   } catch (error) {
     console.error(error)
