@@ -16,6 +16,7 @@ const addUrl = async function(req, res, next) {
   const entry = { city, domain, url };
   try {
     await urlService.addCatalogEntry(entry);
+    console.log('URL inserted successfully');
     res.end();
   } catch (error) {
     console.error(error)
@@ -28,6 +29,7 @@ const editUrl = async function(req, res, next) {
   const entry = { domain, url };
   try {
     await urlService.updateCatalogEntry(entry);
+    console.log('URL updated successfully');
     res.end();
   } catch (error) {
     console.error(error)
