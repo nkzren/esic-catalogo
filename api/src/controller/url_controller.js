@@ -16,12 +16,10 @@ const addUrl = async function(req, res, next) {
   const entry = { city, domain, url };
   try {
     const result = await urlService.addCatalogEntry(entry);
-    if (!result) {
-      console.log('URL inserted successfully');
-      res.end(); 
-    } else {
-      res.status(400).send(result);
+    if (!result.success) {
+      res.status(400);
     }
+    res.send(result); 
   } catch (error) {
     console.error(error)
     next(error);
@@ -32,9 +30,11 @@ const editUrl = async function(req, res, next) {
   const { domain, url } = req.body;
   const entry = { domain, url };
   try {
-    await urlService.updateCatalogEntry(entry);
-    console.log('URL updated successfully');
-    res.end();
+    const result = await urlService.updateCatalogEntry(entry);
+    if (!result.success) {
+      res.status(400);
+    }
+    res.send(result)
   } catch (error) {
     console.error(error)
     next(error);

@@ -10,18 +10,23 @@ const addCatalogEntry = async function (entry) {
 
   if (!validationMsg) {
     await urlRepository.addCatalogEntry(entry);
-    return null;
+    return { success: true, msg: 'URL inserted successfully' };
   }
 
-  return { error_msg: validationMsg };
+  return { success: false, msg: validationMsg };
 }
 
 const updateCatalogEntry = async function (entry) {
   const { domain, url } = entry;
   
-  if (validateUpdate(entry)) {
+  const validationMsg = await validateUpdate(entry);
+
+  if (!validationMsg) {
     await urlRepository.updateEsicUrl(domain, url);
+    return { success: true, msg: 'URL updated successfully' };
   }
+
+  return { success: false, msg: validationMsg };
 }
 
 const validateInsert = async function (entry) {
@@ -36,9 +41,16 @@ const validateInsert = async function (entry) {
   }
 }
 
-const validateUpdate = function (entry) {
+const validateUpdate = async function (entry) {
   const { url, domain } = entry;
-  return url && domain;
+  if(!(url && domain)) {
+    return 'missing_input';
+  }
+
+  const result = await urlRepository.getByDomain(domain);
+  if (!result) {
+    return 'domain_not_registered';
+  }
 }
 
 module.exports = {
