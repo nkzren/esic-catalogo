@@ -23,7 +23,7 @@ const getByDomain = async function(domain) {
 }
 
 const addCatalogEntry = async function(entry) {
-  let connectin = null;
+  let connection = null;
   try {
     connection = await mysql.getConnection(); 
     await connection.execute(
