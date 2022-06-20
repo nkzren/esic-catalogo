@@ -1,35 +1,32 @@
 const urlRepository = require('../repository/url_repository');
 
 const getByDomain = async function (domain) {
-  return await urlRepository.getByDomain(domain)
+  return await urlRepository.getByDomain(domain);
 }
 
-const addCatalogEntry = function (entry) {
+const addCatalogEntry = async function (entry) {
   
-  if (isEntryValid(entry, true)) {
-    urlRepository.addCatalogEntry(entry)
-  }
-}
-
-const updateCatalogEntry = function (entry) {
-  
-  if (isEntryValid(entry, false)) {
-    urlRepository.updateCatalogEntry(entry)
+  if (validateInsert(entry)) {
+    await urlRepository.addCatalogEntry(entry);
   }
 }
 
-// TODO: rever função, deu erro quando testei
-const isEntryValid = function (entry, isAdd) {
+const updateCatalogEntry = await function (entry) {
   
-  if (!(entry.city || entry.domain || entry.url || entry.hasEsic)) {
-    return false;
+  if (validateUpdate(entry)) {
+    await urlRepository.updateCatalogEntry(entry);
   }
-  
-  if (isAdd && getByDomain(entry.domain) || getByDomain(entry.domain)) {
-    return false;
-  }
-  
-  return true;
+}
+
+// TODO better validation?
+const validateInsert = function (entry) {
+  const { city, url, domain } = entry;
+  return city && url && domain;
+}
+
+const validateUpdate = function (entry) {
+  const { url, domain } = entry;
+  return url && domain;
 }
 
 module.exports = {
