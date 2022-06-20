@@ -39,6 +39,23 @@ const addCatalogEntry = async function(entry) {
   }
 }
 
+const updateEsicUrl = async function(domain, esicUrl) {
+  let connection = null;
+  try {
+    connection = await mysql.getConnection();
+    await connection.execute(
+      'UPDATE city SET (:url) WHERE domain = :domain ',
+      { domain, url: esicUrl }
+    );
+  } catch (error) {
+    console.error('Error on updateEsicUrl', error)
+  } finally {
+    if (connection) {
+      await connection.release();
+    }
+  }
+}
+
 module.exports = {
   getByDomain,
   addCatalogEntry,
