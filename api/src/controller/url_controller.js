@@ -15,9 +15,13 @@ const addUrl = async function(req, res, next) {
   const { city, domain, url } = req.body;
   const entry = { city, domain, url };
   try {
-    await urlService.addCatalogEntry(entry);
-    console.log('URL inserted successfully');
-    res.end();
+    const result = await urlService.addCatalogEntry(entry);
+    if (!result) {
+      console.log('URL inserted successfully');
+      res.end(); 
+    } else {
+      res.status(400).send(result);
+    }
   } catch (error) {
     console.error(error)
     next(error);

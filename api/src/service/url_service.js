@@ -6,9 +6,14 @@ const getByDomain = async function (domain) {
 
 const addCatalogEntry = async function (entry) {
   
-  if (validateInsert(entry)) {
+  const validationMsg = await validateInsert(entry);
+
+  if (!validationMsg) {
     await urlRepository.addCatalogEntry(entry);
+    return null;
   }
+
+  return { error_msg: validationMsg };
 }
 
 const updateCatalogEntry = async function (entry) {
@@ -19,10 +24,16 @@ const updateCatalogEntry = async function (entry) {
   }
 }
 
-// TODO better validation?
-const validateInsert = function (entry) {
+const validateInsert = async function (entry) {
   const { city, url, domain } = entry;
-  return city && url && domain;
+  if (!(city && url && domain)) {
+    return 'missing_input';
+  }
+  
+  const result = await urlRepository.getByDomain(domain)
+  if (result) {
+    return 'domain_already_exists';
+  }
 }
 
 const validateUpdate = function (entry) {
