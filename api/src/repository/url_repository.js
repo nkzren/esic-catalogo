@@ -59,4 +59,5 @@ const updateEsicUrl = async function(domain, esicUrl) {
 module.exports = {
   getByDomain,
   addCatalogEntry,
+  updateEsicUrl,
 }

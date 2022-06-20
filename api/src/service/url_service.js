@@ -11,10 +11,11 @@ const addCatalogEntry = async function (entry) {
   }
 }
 
-const updateCatalogEntry = await function (entry) {
+const updateCatalogEntry = async function (entry) {
+  const { domain, url } = entry;
   
   if (validateUpdate(entry)) {
-    await urlRepository.updateCatalogEntry(entry);
+    await urlRepository.updateEsicUrl(domain, url);
   }
 }
 

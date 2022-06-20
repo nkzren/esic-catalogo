@@ -11,11 +11,11 @@ const getUrl = async function(req, res, next) {
   }
 }
 
-const addUrl = function(req, res, next) {
-  const { city, domain, url, hasEsic } = req.body;
-  const entry = { city, domain, url, hasEsic };
+const addUrl = async function(req, res, next) {
+  const { city, domain, url } = req.body;
+  const entry = { city, domain, url };
   try {
-    urlService.addCatalogEntry(entry);
+    await urlService.addCatalogEntry(entry);
     res.end();
   } catch (error) {
     console.error(error)
@@ -23,11 +23,11 @@ const addUrl = function(req, res, next) {
   }
 }
 
-const editUrl = function(req, res, next) {
-  const { city, domain, url, hasEsic } = req.body;
-  const entry = { city, domain, url, hasEsic };
+const editUrl = async function(req, res, next) {
+  const { domain, url } = req.body;
+  const entry = { domain, url };
   try {
-    urlService.updateCatalogEntry(entry);
+    await urlService.updateCatalogEntry(entry);
     res.end();
   } catch (error) {
     console.error(error)
