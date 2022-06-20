@@ -53,6 +53,7 @@ const getByDomain = function(domain) {
   })[0];
 }
 
+// TODO: rever função, tá salvando com ';' no início
 const addCatalogEntry = function(entry) {
   const { city, domain, url, hasEsic } = entry;
   const dataToWrite = {
