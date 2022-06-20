@@ -22,17 +22,21 @@ const getByDomain = async function(domain) {
   }
 }
 
-const addCatalogEntry = function(entry) {
-  const dataToWrite = {
-    ...entry,
+const addCatalogEntry = async function(entry) {
+  let connectin = null;
+  try {
+    connection = await mysql.getConnection(); 
+    await connectin.execute(
+      'INSERT INTO city (city, domain, url) VALUES (:city, :domain, :url)',
+      entry
+    )
+  } catch (error) {
+    console.error('Error on addCatalogEntry', error)
+  } finally {
+    if (connection) {
+      await connection.release();
+    }
   }
-  const csvString = stringify([
-    dataToWrite
-  ], {
-    columns: csvColumns.map(mapToColumnKeys),
-    delimiter: ';',
-  });
-  fs.appendFileSync(`${appDir}/../data/data.csv`, csvString + '\n');
 }
 
 module.exports = {
