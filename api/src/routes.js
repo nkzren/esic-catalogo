@@ -7,9 +7,9 @@ module.exports = (app) => {
 
   app.get('/', helloWorld);
 
-  app.get('/url/get', routeUrl.getUrl);
-  app.post('/url/post', routeUrl.addUrl);
-  app.post('/url/edit', routeUrl.editUrl);
+  app.get('/url', routeUrl.getUrl);
+  app.post('/url', routeUrl.addUrl);
+  app.put('/url', routeUrl.editUrl);
 
   app.use(async (err, req, res, next) => {
     console.error('Uncaught error', err);
