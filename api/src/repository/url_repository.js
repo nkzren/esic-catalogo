@@ -26,7 +26,7 @@ const addCatalogEntry = async function(entry) {
   let connectin = null;
   try {
     connection = await mysql.getConnection(); 
-    await connectin.execute(
+    await connection.execute(
       'INSERT INTO city (city, domain, url) VALUES (:city, :domain, :url)',
       entry
     )
