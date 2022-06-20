@@ -14,20 +14,21 @@ const addCatalogEntry = function (entry) {
 const updateCatalogEntry = function (entry) {
   
   if (isEntryValid(entry, false)) {
-    return urlRepository.addCatalogEntry(entry)
+    urlRepository.updateCatalogEntry(entry)
   }
 }
 
+// TODO: rever função, deu erro quando testei
 const isEntryValid = function (entry, isAdd) {
   
   if (!(entry.city || entry.domain || entry.url || entry.hasEsic)) {
     return false;
   }
-
+  
   if (isAdd && getByDomain(entry.domain) || getByDomain(entry.domain)) {
-      return false;
+    return false;
   }
-    
+  
   return true;
 }
 

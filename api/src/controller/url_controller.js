@@ -24,10 +24,11 @@ const addUrl = function(req, res, next) {
 }
 
 const editUrl = function(req, res, next) {
-  const entry = req.query.entry;
+  const { city, domain, url, hasEsic } = req.body;
+  const entry = { city, domain, url, hasEsic };
   try {
-    const data = urlService.updateCatalogEntry(entry);
-    res.send(data);
+    urlService.updateCatalogEntry(entry);
+    res.end();
   } catch (error) {
     console.error(error)
     next(error);
