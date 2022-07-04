@@ -1,4 +1,4 @@
-INSERT INTO city (city, domain, url)
+INSERT INTO `esic-catalogo`.city (city, domain, url)
 VALUES 
     ('São Paulo','www.capital.sp.gov.br','esic.prefeitura.sp.gov.br/Account/Login.aspx'),
     ('Curitiba','www.curitiba.pr.gov.br','autenticacao-ecidadao.curitiba.pr.gov.br'),
@@ -628,4 +628,4 @@ VALUES
     ('Senador Canedo - GO','www.senadorcanedo.go.gov.br/','gestaopublica.canedo.bsit-br.com.br/portal/user-esic-register.jsf?e='),
     ('Trindade - GO','trindade.go.gov.br/','acessoainformacao.trindade.go.gov.br/informacao/sic'),
     ('Valparaíso de Goiás - GO','www.valparaisodegoias.go.gov.br/','acessoainformacao.valparaisodegoias.go.gov.br/informacao/sic?_ga=2.13695415.1837725312.1592243223-1683117636.1592243223'),
-    ('Brasília - DF','www.df.gov.br/','www.e-sic.df.gov.br/Sistema/'),
+    ('Brasília - DF','www.df.gov.br/','www.e-sic.df.gov.br/Sistema/');
