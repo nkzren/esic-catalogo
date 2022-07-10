@@ -1,6 +1,12 @@
 {
   "db": {
     "host": "database",
-    "port": "3306"
+    "port": "3306",
+    "database": "esic-catalogo",
+    "user": "root",
+    "password": "",
+    "namedPlaceholders": true,
+    "waitForConnections": true,
+    "connectionLimit": 5
   }
 }
